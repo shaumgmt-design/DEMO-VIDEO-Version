@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MBA MockCall Trainer — Interview</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="landing">
+    <div class="center-card">
+      <h1>MBA MockCall Trainer</h1>
+      <p>Practice a realistic voice interview with an AI interviewer — immersive demo.</p>
+      <div class="cta-row">
+        <button id="startInterviewBtn" class="primary">Start Mock Interview</button>
+      </div>
+      <small class="note">This demo hides provider branding and shows a studio-style interviewer.</small>
+    </div>
+  </main>
+
+  <!-- Fullscreen Interview Modal -->
+  <div id="interviewStage" class="stage hidden" aria-hidden="true">
+    <div class="stage-left">
+      <div class="interview-header">
+        <h2>Interview in progress</h2>
+        <button id="endInterviewBtn" class="secondary">End Interview</button>
+      </div>
+
+      <!-- Question / prompts area (optional) -->
+      <div id="transcriptBox" class="transcript">
+        <div class="hint">The interviewer will ask you role-specific questions. Speak naturally when the avatar speaks.</div>
+      </div>
+    </div>
+
+    <div class="stage-right">
+      <!-- Avatar container (video-style) -->
+      <div id="avatarCard" class="avatar-card" role="img" aria-label="Interviewer avatar">
+        <!-- Decorative corporate frame -->
+        <div class="avatar-frame">
+          <!-- Hair / face / body are drawn using SVG to keep everything local -->
+          <svg id="avatarSvg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- background card -->
+            <rect x="0" y="0" width="300" height="420" rx="18" fill="#fff"/>
+            <!-- shoulder -->
+            <ellipse cx="150" cy="330" rx="90" ry="40" fill="#e9eef6"/>
+            <!-- torso -->
+            <rect x="60" y="200" width="180" height="120" rx="18" fill="#f4f7fb"/>
+            <!-- jacket -->
+            <path d="M60 230 Q150 180 240 230 L240 260 Q150 210 60 260 Z" fill="#1f4fa2"/>
+            <!-- face -->
+            <circle cx="150" cy="140" r="58" fill="#f6d8c9"/>
+            <!-- hair (stylized corporate bob) -->
+            <path d="M90 110 Q150 40 210 110 Q210 90 150 70 Q90 90 90 110 Z" fill="#0e2b3b"/>
+            <!-- left eye -->
+            <ellipse cx="125" cy="135" rx="8" ry="6" fill="#121212"/>
+            <!-- right eye -->
+            <ellipse cx="175" cy="135" rx="8" ry="6" fill="#121212"/>
+            <!-- mouth group (we animate scaleY of this element for lip-sync) -->
+            <g id="mouthGroup" transform="translate(150,170)">
+              <ellipse id="mouth" cx="0" cy="0" rx="18" ry="6" fill="#411"/>
+            </g>
+            <!-- subtle accessory (necklace) -->
+            <circle cx="150" cy="185" r="4" fill="#ffd27f" />
+          </svg>
+
+          <!-- small label -->
+          <div class="avatar-label">
+            <strong>Priya — Interviewer</strong><span> | Senior Founder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden embeddable provider element (kept in DOM but visually hidden) -->
+  <div id="providerEmbed" class="provider-embed" aria-hidden="true" style="display:none">
+    <!-- convai widget placeholder will be injected here when interview starts -->
+  </div>
+
+  <script src="script.js"></script>
+  <!-- convai widget loader (still required for the agent, but we'll hide UI) -->
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async></script>
+</body>
+</html>
